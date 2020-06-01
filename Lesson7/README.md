@@ -1,5 +1,14 @@
 # Практическое задание 7
 
+## Результат проверки:
+
+>Почти всё выполнено верно)
+>Пара замечаний к 7_2:
+>1. Агрегирования у вас нигде не работают. Проблема не в vtp, а в режиме, который вы использовали (Протокол PAGP, режим auto. Из документации: "A LAN >port in auto mode cannot form an EtherChannel with another LAN port that is also in auto mode because neither port initiates negotiation.
+>Нужно было почитать предварительно или использовать рекомендуемый **active** с двух сторон).
+>2. **spanning-tree portfast** на trunk не работает) Работает **spanning-tree portfast trunk** (пишет об этом в warning при вводе).
+
+
 ## 1. (ВЫПОЛНЕНО) Домашняя работа на закрепление принципов работы с беспроводной точкой доступа.
 
 Результирующая схема сохранена и выложена в файле **HW_lesson7_1_SukharevAV.pkt**.
@@ -363,11 +372,11 @@
             hostname sw-of1-1
 
             interface fastEthernet 0/23
-            channel-group 1 mode auto 
+            channel-group 1 mode active 
             exit
 
             interface fastEthernet 0/24
-            channel-group 1 mode auto 
+            channel-group 1 mode active 
             exit
 
             interface port-channel 1
@@ -383,19 +392,19 @@
             conf t
 
             interface fastEthernet 0/21
-            channel-group 2 mode auto 
+            channel-group 2 mode active 
             exit
 
             interface fastEthernet 0/22
-            channel-group 2 mode auto 
+            channel-group 2 mode active 
             exit
 
             interface fastEthernet 0/23
-            channel-group 1 mode auto 
+            channel-group 1 mode active 
             exit
 
             interface fastEthernet 0/24
-            channel-group 1 mode auto 
+            channel-group 1 mode active 
             exit
 
             interface port-channel 1
@@ -416,11 +425,11 @@
             conf t
 
             interface fastEthernet 0/23
-            channel-group 1 mode auto 
+            channel-group 1 mode active 
             exit
 
             interface fastEthernet 0/24
-            channel-group 1 mode auto 
+            channel-group 1 mode active 
             exit
 
             interface port-channel 1
@@ -436,11 +445,11 @@
             conf t
 
             interface fastEthernet 0/23
-            channel-group 1 mode auto 
+            channel-group 1 mode active 
             exit
 
             interface fastEthernet 0/24
-            channel-group 1 mode auto 
+            channel-group 1 mode active 
             exit
 
             interface port-channel 1
@@ -457,19 +466,19 @@
             conf t
 
             interface fastEthernet 0/21
-            channel-group 2 mode auto 
+            channel-group 2 mode active 
             exit
 
             interface fastEthernet 0/22
-            channel-group 2 mode auto 
+            channel-group 2 mode active 
             exit
 
             interface fastEthernet 0/23
-            channel-group 1 mode auto 
+            channel-group 1 mode active 
             exit
 
             interface fastEthernet 0/24
-            channel-group 1 mode auto 
+            channel-group 1 mode active 
             exit
 
             interface port-channel 1
@@ -496,7 +505,7 @@
             exit
 
             interface port-channel 1
-            spanning-tree portfast 
+            spanning-tree portfast trunk 
             exit
 
             exit
@@ -512,7 +521,7 @@
             exit
 
             interface port-channel 1
-            spanning-tree portfast 
+            spanning-tree portfast trunk 
             exit
 
             exit
@@ -524,11 +533,11 @@
             conf t
 
             interface port-channel 1
-            spanning-tree portfast 
+            spanning-tree portfast trunk 
             exit
 
             interface port-channel 2
-            spanning-tree portfast 
+            spanning-tree portfast trunk 
             exit
 
             exit
@@ -545,7 +554,7 @@
             exit
 
             interface port-channel 1
-            spanning-tree portfast 
+            spanning-tree portfast trunk  
             exit
 
             exit
@@ -561,7 +570,7 @@
             exit
 
             interface port-channel 1
-            spanning-tree portfast 
+            spanning-tree portfast trunk  
             exit
 
             exit
@@ -574,11 +583,11 @@
             conf t
 
             interface port-channel 1
-            spanning-tree portfast 
+            spanning-tree portfast trunk 
             exit
 
             interface port-channel 2
-            spanning-tree portfast 
+            spanning-tree portfast trunk 
             exit
 
             exit
@@ -606,15 +615,7 @@
             conf t
 
             interface range fastEthernet 0/1 - 3
-            switchport port-security
-            switchport port-security mac-address sticky 
-            exit
-
-            exit
-            write
-
-      3. Коммутатор Switch3
-            
+            switchport port-secucurity mac-address sticky 
             en
             conf t
 
